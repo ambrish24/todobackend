@@ -1,5 +1,6 @@
 package com.amby.rest.todobackend;
 
+import com.amby.rest.SpringApplicationContext;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -21,6 +22,12 @@ public class TodobackendApplication {
 	@Bean
 	public BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public SpringApplicationContext springApplicationContext()
+	{
+		return new SpringApplicationContext();
 	}
 
 }
