@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("/users") // http://localhost:8080/users
 public class UserController {
@@ -17,12 +20,30 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /* To GET Authorization Token & UserId
+
+    http://localhost:8080/users/login
+    {
+        "email": "test@test.com",
+        "password": "123"
+    }
+
+    Accept : application/json
+    Content-Type : application/json
+
+    */
+
     /*{
         "firstName": "Sergey",
         "lastName": "Kargopolov",
         "email": "test@test.com",
         "password": "123"
-    }*/
+    }
+
+    Accept : application/json
+    Content-Type : application/json
+
+    */
 
     @PostMapping(consumes = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE }, produces = {
             MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
@@ -45,6 +66,16 @@ public class UserController {
         return returnValue;
     }
 
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+     then
+
+    http://localhost:8080/users/generateduserid
+
+    Accept : application/json
+    Content-Type : application/json
+    Authorization : token value
+
+    */
     @GetMapping(path = "/{id}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public UserRest getUser(@PathVariable String id) {
         UserRest returnValue = new UserRest();
@@ -55,6 +86,21 @@ public class UserController {
         return returnValue;
     }
 
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+     then
+
+    http://localhost:8080/users/generateduserid
+
+    {
+        "firstName": "Sergey",
+        "lastName": "Kargopolov"
+    }
+
+    Accept : application/json
+    Content-Type : application/json
+    Authorization : token value
+
+    */
     @PutMapping(path = "/{id}", consumes = { MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_XML_VALUE,
             MediaType.APPLICATION_JSON_VALUE })
@@ -70,6 +116,16 @@ public class UserController {
         return returnValue;
     }
 
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+     then
+
+    http://localhost:8080/users/generateduserid
+
+    Accept : application/json
+    Content-Type : application/json
+    Authorization : token value
+
+    */
     @DeleteMapping(path = "/{id}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
     public OperationStatusModel deleteUser(@PathVariable String id) {
         OperationStatusModel returnValue = new OperationStatusModel();
@@ -78,6 +134,36 @@ public class UserController {
         userService.deleteUser(id);
 
         returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
+        return returnValue;
+    }
+
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+     then
+
+    http://localhost:8080/users?page=0&limit=5
+
+    Accept : application/json
+    Content-Type : application/json
+    Authorization : token value
+
+    */
+    @GetMapping(produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public List<UserRest> getUsers(@RequestParam(value = "page", defaultValue = "0") int page,
+                                   @RequestParam(value = "limit", defaultValue = "2") int limit) {
+        List<UserRest> returnValue = new ArrayList<>();
+
+        List<UserDto> users = userService.getUsers(page, limit);
+
+        /*Type listType = new TypeToken<List<UserRest>>() {
+        }.getType();
+        returnValue = new ModelMapper().map(users, listType);*/
+
+		for (UserDto userDto : users) {
+			UserRest userModel = new UserRest();
+			BeanUtils.copyProperties(userDto, userModel);
+			returnValue.add(userModel);
+		}
+
         return returnValue;
     }
 
