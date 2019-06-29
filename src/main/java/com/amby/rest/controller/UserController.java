@@ -1,6 +1,5 @@
 package com.amby.rest.controller;
 
-import com.amby.rest.exceptions.UserServiceException;
 import com.amby.rest.model.request.UserDetailsRequestModel;
 import com.amby.rest.model.response.*;
 import com.amby.rest.service.UserService;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users") // http://localhost:8080/users
+@RequestMapping("/users") // http://localhost:8080/photo_app/users
 public class UserController {
 
     @Autowired
@@ -22,7 +21,7 @@ public class UserController {
 
     /* To GET Authorization Token & UserId
 
-    http://localhost:8080/users/login
+    http://localhost:8080/photo_app/users/login
     {
         "email": "test@test.com",
         "password": "123"
@@ -33,7 +32,9 @@ public class UserController {
 
     */
 
-    /*{
+    /*
+    http://localhost:8080/photo_app/users
+    {
         "firstName": "Sergey",
         "lastName": "Kargopolov",
         "email": "test@test.com",
@@ -66,10 +67,10 @@ public class UserController {
         return returnValue;
     }
 
-    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/photo_app/users/login
      then
 
-    http://localhost:8080/users/generateduserid
+    http://localhost:8080/photo_app/users/generateduserid
 
     Accept : application/json
     Content-Type : application/json
@@ -86,10 +87,10 @@ public class UserController {
         return returnValue;
     }
 
-    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/photo_app/users/login
      then
 
-    http://localhost:8080/users/generateduserid
+    http://localhost:8080/photo_app/users/generateduserid
 
     {
         "firstName": "Sergey",
@@ -116,10 +117,10 @@ public class UserController {
         return returnValue;
     }
 
-    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/photo_app/users/login
      then
 
-    http://localhost:8080/users/generateduserid
+    http://localhost:8080/photo_app/users/generateduserid
 
     Accept : application/json
     Content-Type : application/json
@@ -137,10 +138,10 @@ public class UserController {
         return returnValue;
     }
 
-    /* GET Authorization Token & UserId first using POST request http://localhost:8080/users/login
+    /* GET Authorization Token & UserId first using POST request http://localhost:8080/photo_app/users/login
      then
 
-    http://localhost:8080/users?page=0&limit=5
+    http://localhost:8080/photo_app/users?page=0&limit=5
 
     Accept : application/json
     Content-Type : application/json
