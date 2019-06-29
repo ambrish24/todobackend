@@ -36,16 +36,14 @@ public class UserController {
         return returnValue;
     }
 
-    //@GetMapping(path = "/{id}")
-    @GetMapping
-    public String getUser() {
-        /*UserRest returnValue = new UserRest();
+    @GetMapping(path = "/{id}")
+    public UserRest getUser(@PathVariable String id) {
+        UserRest returnValue = new UserRest();
 
         UserDto userDto = userService.getUserByUserId(id);
-        ModelMapper modelMapper = new ModelMapper();
-        returnValue = modelMapper.map(userDto, UserRest.class);*/
+        BeanUtils.copyProperties(userDto, returnValue);
 
-        return "getUser has been called";
+        return returnValue;
     }
 
 
