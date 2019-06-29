@@ -2,8 +2,7 @@ package com.amby.rest.controller;
 
 import com.amby.rest.exceptions.UserServiceException;
 import com.amby.rest.model.request.UserDetailsRequestModel;
-import com.amby.rest.model.response.ErrorMessages;
-import com.amby.rest.model.response.UserRest;
+import com.amby.rest.model.response.*;
 import com.amby.rest.service.UserService;
 import com.amby.rest.shared.dto.UserDto;
 import org.springframework.beans.BeanUtils;
@@ -53,6 +52,32 @@ public class UserController {
         UserDto userDto = userService.getUserByUserId(id);
         BeanUtils.copyProperties(userDto, returnValue);
 
+        return returnValue;
+    }
+
+    @PutMapping(path = "/{id}", consumes = { MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE }, produces = { MediaType.APPLICATION_XML_VALUE,
+            MediaType.APPLICATION_JSON_VALUE })
+    public UserRest updateUser(@PathVariable String id, @RequestBody UserDetailsRequestModel userDetails) {
+        UserRest returnValue = new UserRest();
+
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userDetails, userDto);
+
+        UserDto updateUser = userService.updateUser(id, userDto);
+        BeanUtils.copyProperties(updateUser, returnValue);
+
+        return returnValue;
+    }
+
+    @DeleteMapping(path = "/{id}", produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
+    public OperationStatusModel deleteUser(@PathVariable String id) {
+        OperationStatusModel returnValue = new OperationStatusModel();
+        returnValue.setOperationName(RequestOperationName.DELETE.name());
+
+        userService.deleteUser(id);
+
+        returnValue.setOperationResult(RequestOperationStatus.SUCCESS.name());
         return returnValue;
     }
 

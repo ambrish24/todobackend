@@ -1,6 +1,8 @@
 package com.amby.rest.service.impl;
 
 import com.amby.rest.entity.UserEntity;
+import com.amby.rest.exceptions.UserServiceException;
+import com.amby.rest.model.response.ErrorMessages;
 import com.amby.rest.repository.UserRepository;
 import com.amby.rest.service.UserService;
 import com.amby.rest.shared.Utils;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 
@@ -80,5 +83,35 @@ public class UserServiceImpl implements UserService {
         BeanUtils.copyProperties(userEntity, returnValue);
 
         return returnValue;
+    }
+
+    @Override
+    public UserDto updateUser(String userId, UserDto user) {
+        UserDto returnValue = new UserDto();
+
+        UserEntity userEntity = userRepository.findByUserId(userId);
+
+        if (userEntity == null)
+            throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
+
+        userEntity.setFirstName(user.getFirstName());
+        userEntity.setLastName(user.getLastName());
+
+        UserEntity updatedUserDetails = userRepository.save(userEntity);
+        BeanUtils.copyProperties(updatedUserDetails, returnValue);
+
+        return returnValue;
+    }
+
+    @Transactional
+    @Override
+    public void deleteUser(String userId) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+
+        if (userEntity == null)
+            throw new UserServiceException(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
+
+        userRepository.delete(userEntity);
+
     }
 }
