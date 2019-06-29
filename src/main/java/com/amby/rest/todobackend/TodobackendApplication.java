@@ -1,6 +1,7 @@
 package com.amby.rest.todobackend;
 
 import com.amby.rest.SpringApplicationContext;
+import com.amby.rest.security.AppProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -28,6 +29,12 @@ public class TodobackendApplication {
 	public SpringApplicationContext springApplicationContext()
 	{
 		return new SpringApplicationContext();
+	}
+
+	@Bean(name="AppProperties")
+	public AppProperties getAppProperties()
+	{
+		return new AppProperties();
 	}
 
 }

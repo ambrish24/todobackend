@@ -6,10 +6,7 @@ import com.amby.rest.service.UserService;
 import com.amby.rest.shared.dto.UserDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users") // http://localhost:8080/users
@@ -37,6 +34,18 @@ public class UserController {
         BeanUtils.copyProperties(createdUser, returnValue);
 
         return returnValue;
+    }
+
+    //@GetMapping(path = "/{id}")
+    @GetMapping
+    public String getUser() {
+        /*UserRest returnValue = new UserRest();
+
+        UserDto userDto = userService.getUserByUserId(id);
+        ModelMapper modelMapper = new ModelMapper();
+        returnValue = modelMapper.map(userDto, UserRest.class);*/
+
+        return "getUser has been called";
     }
 
 
