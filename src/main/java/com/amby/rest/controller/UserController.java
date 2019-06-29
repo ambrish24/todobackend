@@ -1,6 +1,8 @@
 package com.amby.rest.controller;
 
+import com.amby.rest.exceptions.UserServiceException;
 import com.amby.rest.model.request.UserDetailsRequestModel;
+import com.amby.rest.model.response.ErrorMessages;
 import com.amby.rest.model.response.UserRest;
 import com.amby.rest.service.UserService;
 import com.amby.rest.shared.dto.UserDto;
@@ -28,6 +30,12 @@ public class UserController {
     public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) {
 
         UserRest returnValue = new UserRest();
+
+        // Handle UserServiceException
+        // if(userDetails.getFirstName().isEmpty()) throw new UserServiceException("USExcp : "+ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
+
+        // Handle All Other Exception
+        if(userDetails.getFirstName().isEmpty()) throw new NullPointerException("NPE : "+ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
 
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(userDetails, userDto);
