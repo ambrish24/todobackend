@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/users") // http://localhost:8080/photo_app/users
 public class UserController {
 

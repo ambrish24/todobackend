@@ -22,8 +22,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private final AuthenticationManager authenticationManager;
+public class AuthenticationFilter /*extends UsernamePasswordAuthenticationFilter*/ {
+
+    /*private final AuthenticationManager authenticationManager;
 
     private String contentType;
 
@@ -73,6 +74,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
         res.addHeader("UserID", userDto.getUserId());
     }
-
+*/
 
 }

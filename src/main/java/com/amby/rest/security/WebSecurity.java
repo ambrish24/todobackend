@@ -10,11 +10,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@Configuration
-@EnableWebSecurity
-public class WebSecurity extends WebSecurityConfigurerAdapter{
+/*@Configuration
+@EnableWebSecurity*/
+public class WebSecurity /*extends WebSecurityConfigurerAdapter*/{
 
-    private final UserService userDetailsService;
+    /*private final UserService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public WebSecurity(UserService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
@@ -26,7 +26,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         http.csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                //.antMatchers(HttpMethod.POST, SecurityConstants.SIGN_UP_URL)
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()
@@ -45,5 +46,5 @@ public class WebSecurity extends WebSecurityConfigurerAdapter{
         filter.setFilterProcessesUrl("/users/login");
         return filter;
     }
-
+*/
 }

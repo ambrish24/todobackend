@@ -15,9 +15,9 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import io.jsonwebtoken.Jwts;
 
-public class AuthorizationFilter extends BasicAuthenticationFilter {
+public class AuthorizationFilter /*extends BasicAuthenticationFilter*/ {
 
-    public AuthorizationFilter(AuthenticationManager authManager) {
+    /*public AuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);
     }
 
@@ -60,6 +60,6 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 
         return null;
     }
-
+*/
 }
 
