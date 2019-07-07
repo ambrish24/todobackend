@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
-@CrossOrigin(exposedHeaders = "errors, content-type")
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/api/owners")
 public class OwnerRestController {
 

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
-@CrossOrigin(exposedHeaders = "errors, content-type")
+@CrossOrigin(origins="http://localhost:4200")
 @RequestMapping("/")
 public class RootRestController {
 

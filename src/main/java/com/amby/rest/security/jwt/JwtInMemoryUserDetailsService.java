@@ -20,10 +20,12 @@ public class JwtInMemoryUserDetailsService implements UserDetailsService {
 	UserService userService;
 
 	static {
-		inMemoryUserList.add(new JwtUserDetails(1L, "in28minutes",
-				"$2a$10$3zHzb.Npv1hfZbLEU5qsdOju/tk2je6W6PnNnY.c1ujWPcZh4PL6e", "ROLE_USER_2")); // password = dummy
-		inMemoryUserList.add(new JwtUserDetails(2L, "ranga",
-				"$2a$10$IetbreuU5KihCkDB6/r1DOJO0VyU9lSiBcrMDT.biU7FOt2oqZDPm", "ROLE_USER_2"));
+		inMemoryUserList.add(new JwtUserDetails(1L, "ambrish",
+				"$2a$10$oOXB82g1r/kfXKTegPL6LO43vQmeY64zcA41Z6wjc4jF1CAttAuTG", "ROLE_USER_2")); // password = 123
+		inMemoryUserList.add(new JwtUserDetails(2L, "msdhoni",
+				"$2a$10$oOXB82g1r/kfXKTegPL6LO43vQmeY64zcA41Z6wjc4jF1CAttAuTG", "ROLE_USER_2")); // password = 123
+		inMemoryUserList.add(new JwtUserDetails(3L, "narendra",
+				"$2a$10$oOXB82g1r/kfXKTegPL6LO43vQmeY64zcA41Z6wjc4jF1CAttAuTG", "ROLE_USER_2")); // password = 123
 		
 		//$2a$10$IetbreuU5KihCkDB6/r1DOJO0VyU9lSiBcrMDT.biU7FOt2oqZDPm
 	}
